@@ -139,9 +139,10 @@ header{
   display:grid;grid-template-columns:1fr;gap:16px;
 }
 @media(min-width:700px){
-  .gallery-grid{grid-template-columns:repeat(3,1fr);grid-auto-rows:220px}
-  .gallery-grid .g1{grid-column:span 2;grid-row:span 2}
-  .gallery-grid .g5{grid-column:span 2}
+  .gallery-grid{grid-template-columns:repeat(4,1fr);grid-auto-rows:170px;grid-auto-flow:dense;gap:14px}
+  .gallery-grid .big{grid-column:span 2;grid-row:span 2}
+  .gallery-grid .wide{grid-column:span 2}
+  .gallery-grid .tall{grid-row:span 2}
 }
 .gallery-grid figure{margin:0;border-radius:var(--radius);overflow:hidden;position:relative;height:100%}
 .gallery-grid img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/2}
@@ -182,6 +183,12 @@ header{
 .cta-box h2{color:#fff;max-width:26ch;margin-left:auto;margin-right:auto}
 .cta-box p{color:#c9c9cc;max-width:52ch;margin-left:auto;margin-right:auto}
 .cta-box .btn{margin-top:.4em}
+.tf-wrap{
+  max-width:720px;margin:24px auto 0;min-height:480px;
+  background:#fff;border-radius:20px;overflow:hidden;
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.35);
+}
+.tf-wrap > div{width:100%;height:100%;min-height:480px}
 
 /* Footer */
 footer{padding:32px 0;border-top:1px solid var(--line)}
@@ -293,20 +300,35 @@ footer a{text-decoration:underline}
         <p>Flexibles, tout confort&nbsp;: ils n'attendent plus que vous.</p>
       </div>
       <div class="gallery-grid">
-        <figure class="g1">
+        <figure class="big">
           <img src="img/gallery-1-900.webp" srcset="img/gallery-1-480.webp 480w, img/gallery-1-900.webp 900w" sizes="(min-width:700px) 40vw, 100vw" width="900" height="599" alt="Salle de réunion design avec mur végétal accent vert, bureaux opérés à Paris" loading="lazy" decoding="async">
         </figure>
-        <figure class="g2">
-          <img src="img/gallery-2-900.webp" srcset="img/gallery-2-480.webp 480w, img/gallery-2-900.webp 900w" sizes="(min-width:700px) 30vw, 100vw" width="900" height="600" alt="Salle de réunion baignée de lumière avec vue sur les toits haussmanniens de Paris" loading="lazy" decoding="async">
+        <figure>
+          <img src="img/gallery-2-900.webp" srcset="img/gallery-2-480.webp 480w, img/gallery-2-900.webp 900w" sizes="(min-width:700px) 22vw, 100vw" width="900" height="600" alt="Salle de réunion baignée de lumière avec vue sur les toits haussmanniens de Paris" loading="lazy" decoding="async">
         </figure>
-        <figure class="g3">
-          <img src="img/gallery-3-900.webp" srcset="img/gallery-3-480.webp 480w, img/gallery-3-900.webp 900w" sizes="(min-width:700px) 30vw, 100vw" width="900" height="600" alt="Espace de travail privatif dans un appartement haussmannien rénové" loading="lazy" decoding="async">
+        <figure>
+          <img src="img/gallery-3-900.webp" srcset="img/gallery-3-480.webp 480w, img/gallery-3-900.webp 900w" sizes="(min-width:700px) 22vw, 100vw" width="900" height="600" alt="Espace de travail privatif dans un appartement haussmannien rénové" loading="lazy" decoding="async">
         </figure>
-        <figure class="g4">
-          <img src="img/gallery-4-900.webp" srcset="img/gallery-4-480.webp 480w, img/gallery-4-900.webp 900w" sizes="(min-width:700px) 30vw, 100vw" width="900" height="600" alt="Plateau de bureaux avec parquet à chevrons et moulures d'époque" loading="lazy" decoding="async">
+        <figure class="tall">
+          <img src="img/gallery-7-900.webp" srcset="img/gallery-7-480.webp 480w, img/gallery-7-900.webp 900w" sizes="(min-width:700px) 22vw, 100vw" width="900" height="600" alt="Espace lounge et cuisine avec suspensions dorées design" loading="lazy" decoding="async">
         </figure>
-        <figure class="g5">
-          <img src="img/gallery-5-900.webp" srcset="img/gallery-5-480.webp 480w, img/gallery-5-900.webp 900w" sizes="(min-width:700px) 55vw, 100vw" width="900" height="599" alt="Vue panoramique sur les toits de Paris depuis une terrasse de bureaux" loading="lazy" decoding="async">
+        <figure>
+          <img src="img/gallery-4-900.webp" srcset="img/gallery-4-480.webp 480w, img/gallery-4-900.webp 900w" sizes="(min-width:700px) 22vw, 100vw" width="900" height="600" alt="Plateau de bureaux avec parquet à chevrons et moulures d'époque" loading="lazy" decoding="async">
+        </figure>
+        <figure class="wide">
+          <img src="img/gallery-5-900.webp" srcset="img/gallery-5-480.webp 480w, img/gallery-5-900.webp 900w" sizes="(min-width:700px) 45vw, 100vw" width="900" height="599" alt="Vue panoramique sur les toits de Paris depuis une terrasse de bureaux" loading="lazy" decoding="async">
+        </figure>
+        <figure>
+          <img src="img/gallery-6-900.webp" srcset="img/gallery-6-480.webp 480w, img/gallery-6-900.webp 900w" sizes="(min-width:700px) 22vw, 100vw" width="900" height="600" alt="Salle de réunion haussmannienne avec cheminée en marbre" loading="lazy" decoding="async">
+        </figure>
+        <figure>
+          <img src="img/gallery-8-900.webp" srcset="img/gallery-8-480.webp 480w, img/gallery-8-900.webp 900w" sizes="(min-width:700px) 22vw, 100vw" width="900" height="600" alt="Open space loft avec poutres métalliques apparentes et vue sur les toits" loading="lazy" decoding="async">
+        </figure>
+        <figure class="wide">
+          <img src="img/gallery-9-900.webp" srcset="img/gallery-9-480.webp 480w, img/gallery-9-900.webp 900w" sizes="(min-width:700px) 45vw, 100vw" width="900" height="600" alt="Espace lounge avec vue sur la Tour Eiffel" loading="lazy" decoding="async">
+        </figure>
+        <figure>
+          <img src="img/gallery-10-900.webp" srcset="img/gallery-10-480.webp 480w, img/gallery-10-900.webp 900w" sizes="(min-width:700px) 22vw, 100vw" width="900" height="600" alt="Open space avec rideaux orange et hautes fenêtres haussmanniennes" loading="lazy" decoding="async">
         </figure>
       </div>
     </div>
@@ -396,13 +418,9 @@ footer a{text-decoration:underline}
         <span class="eyebrow">Votre recherche de bureaux</span>
         <h2>Décrivez-nous votre besoin, nous nous occupons du reste</h2>
         <p>Un expert Snapdesk vous recontacte sous 24h avec une sélection de plateaux adaptés à votre équipe et votre budget.</p>
-        <!--
-          Typeform reçu, volontairement pas encore activé (chargement différé demandé) :
-          <div data-tf-live="01K74MCQTG9XVR4PEHY3E80DJP"></div><script src="//embed.typeform.com/next/embed.js"></script>
-          Pour l'activer : remplacer le bouton ci-dessous par le <div> et charger le script
-          en "defer" juste avant </body>, plutôt qu'en tête de page.
-        -->
-        <a class="btn btn-accent" href="mailto:contact@snapdesk.co?subject=Recherche%20de%20bureaux%20à%20Paris">Je recherche des bureaux →</a>
+      </div>
+      <div class="tf-wrap">
+        <div data-tf-live="01K74MCQTG9XVR4PEHY3E80DJP"></div>
       </div>
     </div>
   </section>
@@ -416,5 +434,6 @@ footer a{text-decoration:underline}
   </div>
 </footer>
 
+<script src="https://embed.typeform.com/next/embed.js" defer></script>
 </body>
 </html>
