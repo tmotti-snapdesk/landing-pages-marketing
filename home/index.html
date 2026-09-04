@@ -31,8 +31,8 @@
   --cream:#f0eae5;
   --ink:#111111;
   --gray:#5c5c62;
-  --line:#e6ded4;
-  --radius:16px;
+  --line:#e2d9cd;
+  --radius:3px;
   --wrap:1180px;
 }
 @font-face{
@@ -54,28 +54,44 @@ body{
 img{max-width:100%;display:block}
 a{color:inherit}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
-h1,h2,h3{line-height:1.15;margin:0 0 .5em;font-weight:700}
-h1{font-size:clamp(2rem,4vw + .5rem,3.2rem)}
-h2{font-size:clamp(1.6rem,2.6vw + .5rem,2.4rem)}
-h3{font-size:1.15rem}
+h1,h2,h3{line-height:1.1;margin:0 0 .5em;font-weight:700;letter-spacing:-.01em}
+h1{font-size:clamp(2.1rem,3.4vw + 1rem,3.6rem)}
+h2{font-size:clamp(1.7rem,1.6vw + 1.2rem,2.3rem)}
+h3{font-size:1.1rem}
 p{margin:0 0 1em;color:var(--gray)}
 .eyebrow{
-  display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--rose);margin-bottom:.75em;
+  display:block;font-size:.76rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--rose);margin-bottom:.9em;
 }
+
+/* Section head: kicker + heading on the left, supporting text on the right.
+   Deliberately not centered — every section had the same centered
+   eyebrow/h2/p block before, which read as a generic template. */
+.head{margin-bottom:44px}
+.head h2{margin:0;max-width:20ch}
+.head p{margin:0;max-width:44ch;align-self:end}
+@media(min-width:820px){
+  .head{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:end}
+}
+
+.link-arrow{
+  display:inline-flex;align-items:center;gap:.4em;font-weight:700;font-size:.92rem;
+  text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px;
+}
+.link-arrow.light{color:#fff}
+.link-arrow:not(.light){color:var(--ink)}
+.link-arrow:hover{color:var(--rose)}
 
 .btn{
   display:inline-flex;align-items:center;gap:.5em;
   background:var(--black);color:#fff;text-decoration:none;
-  font-weight:600;font-size:1rem;padding:.9em 1.6em;border-radius:999px;
+  font-weight:600;font-size:1rem;padding:.9em 1.7em;border-radius:999px;
   border:1px solid var(--black);transition:background .15s,color .15s;
   white-space:nowrap;
 }
 .btn:hover{background:#000}
 .btn-accent{background:var(--rose);border-color:var(--rose);color:#241017}
 .btn-accent:hover{background:#dd7a8e}
-.btn-outline{background:transparent;color:var(--black);border-color:var(--black)}
-.btn-outline:hover{background:var(--black);color:#fff}
 
 /* Header */
 header{
@@ -85,13 +101,13 @@ header{
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px}
 .logo{display:inline-flex;text-decoration:none;flex:none}
 .logo img{height:26px;width:auto;display:block}
-.nav-links{display:none;list-style:none;margin:0;padding:0;gap:26px;align-items:center;font-size:.92rem;font-weight:600}
+.nav-links{display:none;list-style:none;margin:0;padding:0;gap:26px;align-items:center;font-size:.9rem;font-weight:600}
 .nav-links a{text-decoration:none}
 .nav-links a:hover{color:var(--rose)}
 .nav-right{display:flex;align-items:center;gap:16px}
-.nav-phone{display:none;font-size:.9rem;font-weight:700;text-decoration:none;white-space:nowrap}
-.nav-login{display:none;font-size:.88rem;font-weight:700;text-decoration:none;white-space:nowrap}
-.nav .btn{padding:.65em 1.3em;font-size:.88rem}
+.nav-phone{display:none;font-size:.88rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.nav-login{display:none;font-size:.86rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.nav .btn{padding:.65em 1.3em;font-size:.86rem}
 .nav-burger{
   display:inline-flex;align-items:center;justify-content:center;
   width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:#fff;
@@ -105,7 +121,7 @@ details.mobile-nav[open] .nav-burger{background:var(--black)}
 details.mobile-nav[open] .nav-burger svg{stroke:#fff}
 .mobile-panel{
   position:fixed;inset:65px 16px auto 16px;z-index:40;
-  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  background:#fff;border:1px solid var(--line);border-radius:8px;
   box-shadow:0 24px 60px -20px rgba(0,0,0,.25);padding:10px;
 }
 .mobile-panel ul{list-style:none;margin:0;padding:0}
@@ -120,139 +136,131 @@ details.mobile-nav[open] .nav-burger svg{stroke:#fff}
   .nav-burger,details.mobile-nav{display:none}
 }
 
-/* Hero */
-.hero{background:linear-gradient(180deg,var(--cream),#fff 70%)}
-.hero .wrap{display:grid;grid-template-columns:1fr;gap:40px;padding-top:48px;padding-bottom:48px;align-items:center}
-.hero-copy p.lead{font-size:1.15rem;color:var(--gray);max-width:46ch}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:1.6em}
-.hero-media{
-  position:relative;border-radius:var(--radius);overflow:hidden;
-  aspect-ratio:3/2;background:var(--cream);
-  box-shadow:0 20px 50px -20px rgba(18,35,61,.35);
-}
-.hero-media img{width:100%;height:100%;object-fit:cover}
-@media(min-width:960px){
-  .hero .wrap{grid-template-columns:1.05fr 1fr;padding-top:56px;padding-bottom:64px}
-}
+/* Hero — full-bleed photo, headline set directly on the image
+   (how the real listings are photographed and sold) rather than a
+   boxed image floating next to a text column. */
+.hero{position:relative;min-height:520px;display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(9,7,6,.88) 0%,rgba(9,7,6,.4) 50%,rgba(9,7,6,.05) 100%)}
+.hero-inner{position:relative;z-index:2;padding:60px 0 44px;width:100%}
+.hero .eyebrow{color:var(--rose)}
+.hero h1{color:#fff}
+.hero .lead{color:#e8e3dd;max-width:44ch;font-size:1.12rem}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:22px;align-items:center;margin-top:1.5em}
+@media(min-width:960px){.hero{min-height:660px}.hero-inner{padding:76px 0 64px}}
 
 /* Trust bar */
-.trust{padding:36px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.trust p{text-align:center;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-bottom:1.4em}
-.logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:36px 48px}
-.logos img{height:28px;width:auto;filter:grayscale(1);opacity:.55;transition:opacity .15s,filter .15s}
+.trust{padding:34px 0;border-bottom:1px solid var(--line)}
+.trust p{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:1.3em}
+.logos{display:flex;flex-wrap:wrap;align-items:center;gap:34px 46px}
+.logos img{height:26px;width:auto;filter:grayscale(1);opacity:.5;transition:opacity .15s,filter .15s}
 .logos img:hover{filter:none;opacity:1}
 
 /* Text + image split */
-.split{padding:72px 0}
+.split{padding:76px 0}
 .split .wrap{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
 .split-media{border-radius:var(--radius);overflow:hidden;aspect-ratio:3/2}
 .split-media img{width:100%;height:100%;object-fit:cover}
 .split p strong{color:var(--ink)}
 @media(min-width:900px){
-  .split .wrap{grid-template-columns:1fr 1fr;gap:56px}
-  .split.reverse .wrap{grid-template-columns:1fr 1fr}
-  .split.reverse .split-media{order:2}
+  .split .wrap{grid-template-columns:.95fr 1fr;gap:64px}
 }
 
-/* Pillars */
-.pillars{padding:72px 0;background:var(--cream)}
-.pillars-head{max-width:640px;margin:0 auto 44px;text-align:center}
-.pillar-grid{display:grid;grid-template-columns:1fr;gap:24px}
-@media(min-width:700px){.pillar-grid{grid-template-columns:1fr 1fr}}
-@media(min-width:1080px){.pillar-grid{grid-template-columns:repeat(4,1fr)}}
-.pillar{
-  background:#fff;border-radius:var(--radius);padding:28px 24px;border:1px solid var(--line);
-}
-.pillar .icon{
-  width:44px;height:44px;border-radius:12px;background:var(--rose);
-  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
-}
-.pillar:nth-child(even) .icon{background:var(--sage)}
-.pillar .icon svg{width:22px;height:22px;stroke:#111}
-.pillar h3{margin-bottom:.4em}
+/* Pillars — a numbered index row instead of icon-in-a-box cards */
+.pillars{padding:76px 0;background:var(--cream)}
+.pillar-row{display:grid;grid-template-columns:1fr;border-top:1px solid var(--line)}
+.pillar{padding:26px 0;border-bottom:1px solid var(--line)}
+.pillar-n{display:block;font-size:.82rem;font-weight:700;color:var(--rose);letter-spacing:.06em;margin-bottom:.7em}
+.pillar h3{margin-bottom:.35em}
 .pillar p{margin:0;font-size:.95rem}
+@media(min-width:900px){
+  .pillar-row{grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+  .pillar{border-bottom:none;border-right:1px solid var(--line);padding:30px 28px}
+  .pillar:last-child{border-right:none}
+}
 
 /* Stats (dark) */
-.stats{background:var(--black);color:#fff;padding:72px 0}
-.stats-head{max-width:620px;margin:0 auto 44px;text-align:center}
-.stats-head h2{color:#fff}
-.stats-head p{color:#c9c9cc}
-.stat-grid{display:grid;grid-template-columns:1fr;gap:24px}
+.stats{background:var(--black);color:#fff;padding:76px 0}
+.stats .head h2{color:#fff}
+.stats .head p{color:#c9c9cc}
+.stat-grid{display:grid;grid-template-columns:1fr;border-top:1px solid rgba(255,255,255,.16)}
 @media(min-width:760px){.stat-grid{grid-template-columns:repeat(3,1fr)}}
-.stat{
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
-  border-radius:var(--radius);padding:32px 24px;text-align:center;
-}
-.stat .num{font-size:2.4rem;font-weight:700;color:var(--rose);margin-bottom:.2em}
+.stat{padding:28px 4px;border-bottom:1px solid rgba(255,255,255,.16)}
+@media(min-width:760px){.stat{border-right:1px solid rgba(255,255,255,.16);padding:28px 28px}.stat:last-child{border-right:none}}
+.stat .num{font-size:2.3rem;font-weight:700;color:var(--rose);margin-bottom:.2em}
 .stat p{color:#c9c9cc;margin:0;font-size:.95rem}
 
 /* Stats (light variant) */
-.stats-light{padding:72px 0}
-.stats-light .stat{background:var(--cream);border:1px solid var(--line)}
+.stats-light{padding:76px 0}
+.stats-light .stat-grid{border-top:1px solid var(--line)}
+.stats-light .stat{border-bottom:1px solid var(--line)}
 .stats-light .stat .num{color:var(--ink)}
 .stats-light .stat p{color:var(--gray)}
+@media(min-width:760px){.stats-light .stat{border-right:1px solid var(--line)}.stats-light .stat:last-child{border-right:none}}
 
 /* Included / services */
-.included{padding:72px 0;background:var(--cream)}
+.included{padding:76px 0;background:var(--cream)}
 .included .wrap{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
 .included-media{border-radius:var(--radius);overflow:hidden;aspect-ratio:16/9}
 .included-media img{width:100%;height:100%;object-fit:cover}
-.included ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.2em 1em}
-.included li{display:flex;gap:.6em;align-items:flex-start;padding:.5em 0;font-size:.96rem;color:var(--ink)}
-.included li svg{flex:none;width:18px;height:18px;margin-top:.15em;stroke:var(--rose)}
-@media(min-width:900px){.included .wrap{grid-template-columns:1fr 1.1fr;gap:56px}}
+.plain-list{list-style:none;margin:0;padding:0;columns:2;column-gap:2em}
+.plain-list li{padding:.6em 0;border-bottom:1px solid var(--line);font-size:.95rem;color:var(--ink);break-inside:avoid}
+@media(min-width:900px){.included .wrap{grid-template-columns:1fr 1.1fr;gap:60px}}
 
 /* Espaces gallery */
-.spaces{padding:72px 0}
-.spaces-head{max-width:640px;margin:0 auto 44px;text-align:center}
-.space-grid{display:grid;grid-template-columns:1fr;gap:20px}
+.spaces{padding:76px 0}
+.space-grid{display:grid;grid-template-columns:1fr;gap:28px 20px}
 @media(min-width:640px){.space-grid{grid-template-columns:1fr 1fr}}
 @media(min-width:1000px){.space-grid{grid-template-columns:repeat(4,1fr)}}
-.space-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);text-decoration:none;color:inherit;display:block;background:#fff}
-.space-thumb{position:relative;aspect-ratio:4/3}
-.space-thumb img{width:100%;height:100%;object-fit:cover}
+.space-card{text-decoration:none;color:inherit;display:block}
+.space-thumb{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:var(--radius)}
+.space-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.space-card:hover .space-thumb img{transform:scale(1.04)}
+.space-scrim{position:absolute;left:0;right:0;bottom:0;height:55%;background:linear-gradient(0deg,rgba(10,8,8,.65),transparent);pointer-events:none}
 .space-badge{
-  position:absolute;top:10px;left:10px;font-size:.7rem;font-weight:700;letter-spacing:.03em;
-  text-transform:uppercase;padding:.35em .8em;border-radius:999px;background:#fff;color:var(--ink);
+  position:absolute;left:12px;bottom:11px;font-size:.68rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;color:#fff;
 }
-.space-badge.available{background:var(--sage);color:#0d1f1b}
-.space-body{padding:14px 16px}
-.space-body h3{font-size:.98rem;margin:0 0 .3em}
-.space-meta{display:flex;justify-content:space-between;align-items:center;font-size:.84rem;color:var(--gray)}
+.space-badge.available{color:var(--sage)}
+.space-body{padding:12px 1px 0}
+.space-body h3{font-size:.96rem;margin:0 0 .3em}
+.space-meta{display:flex;justify-content:space-between;align-items:baseline;font-size:.82rem;color:var(--gray)}
 .space-meta .price{font-weight:700;color:var(--ink)}
-.spaces-cta{text-align:center;margin-top:36px}
+.spaces-cta{margin-top:40px}
 
-/* Testimonials */
-.testimonials{padding:72px 0;background:var(--cream)}
-.testimonials-head{max-width:640px;margin:0 auto 32px;text-align:center}
-.t-grid{display:grid;grid-template-columns:1fr;gap:24px}
-@media(min-width:900px){.t-grid{grid-template-columns:repeat(3,1fr)}}
-.t-card{background:#fff;border-radius:var(--radius);padding:28px 24px;border:1px solid var(--line)}
-.t-card p{color:var(--ink);font-size:.96rem;margin-bottom:1.4em}
-.t-who{display:flex;align-items:center;gap:12px}
-.t-who img{width:44px;height:44px;border-radius:999px;object-fit:cover}
-.t-who strong{display:block;font-size:.92rem}
-.t-who span{display:block;font-size:.82rem;color:var(--gray)}
-.t-count{text-align:center;margin-top:40px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.9rem;color:var(--gray)}
+/* Testimonials — plain quote blocks, no avatar-in-a-card widget */
+.testimonials{padding:76px 0;background:var(--cream)}
+.quote-row{display:grid;grid-template-columns:1fr;gap:32px;border-top:1px solid var(--line);padding-top:8px}
+@media(min-width:900px){
+  .quote-row{grid-template-columns:repeat(3,1fr);gap:0}
+  .quote{padding:36px 32px 0 0;border-right:1px solid var(--line)}
+  .quote:last-child{border-right:none;padding-right:0}
+  .quote:nth-child(n+2){padding-left:32px}
+}
+.quote:not(:first-child){padding-top:36px}
+.quote blockquote{margin:0 0 1.3em;font-size:1.02rem;color:var(--ink)}
+.quote blockquote::before{content:"\201C";color:var(--rose);font-size:1.9rem;line-height:0;display:inline-block;vertical-align:-.3em;margin-right:.05em}
+.quote figcaption{font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--gray)}
+.quote figcaption strong{color:var(--ink)}
+.t-count{margin-top:44px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.86rem;color:var(--gray)}
 
-/* Blog */
-.blog{padding:72px 0}
-.blog-head{max-width:640px;margin:0 auto 44px;text-align:center}
-.blog-grid{display:grid;grid-template-columns:1fr;gap:20px}
-@media(min-width:700px){.blog-grid{grid-template-columns:1fr 1fr}}
-@media(min-width:1080px){.blog-grid{grid-template-columns:repeat(3,1fr)}}
-.blog-card{border:1px solid var(--line);border-radius:var(--radius);padding:24px;text-decoration:none;color:inherit;display:block;transition:border-color .15s}
-.blog-card:hover{border-color:var(--rose)}
-.blog-card h3{font-size:1.02rem;margin-bottom:.5em}
-.blog-card p{font-size:.9rem;margin-bottom:1em}
-.blog-card .read{font-size:.84rem;font-weight:700;color:var(--rose)}
-.blog-cta{text-align:center;margin-top:36px}
+/* Blog — an index of rows, not a grid of cards */
+.blog{padding:76px 0}
+.post-list{border-top:1px solid var(--line)}
+.post-row{display:grid;grid-template-columns:1fr;gap:6px;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+@media(min-width:800px){.post-row{grid-template-columns:1.2fr 1.6fr auto;align-items:center;gap:28px}}
+.post-row h3{margin:0;font-size:1.04rem;font-weight:700}
+.post-row p{margin:0;font-size:.92rem}
+.post-row .link-arrow{border-bottom:none;padding-bottom:0;justify-self:start}
+@media(min-width:800px){.post-row .link-arrow{justify-self:end}}
+.post-row:hover h3{color:var(--rose)}
+.blog-cta{margin-top:36px}
 
 /* Final CTA */
-.cta{padding:72px 0;background:var(--cream)}
+.cta{padding:76px 0;background:var(--cream)}
 .cta-card{
-  max-width:720px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;
-  border:1px solid var(--line);box-shadow:0 20px 50px -32px rgba(0,0,0,.25);
+  max-width:720px;margin:0 auto;background:#fff;border-radius:8px;overflow:hidden;
+  border:1px solid var(--line);
 }
 .cta-intro{padding:48px 40px 8px;text-align:center}
 .cta-intro h2{max-width:26ch;margin-left:auto;margin-right:auto}
@@ -296,7 +304,7 @@ footer{padding:56px 0 28px;border-top:1px solid var(--line);background:var(--cre
 .footer-grid{display:grid;grid-template-columns:1fr;gap:36px;padding-bottom:36px}
 @media(min-width:720px){.footer-grid{grid-template-columns:1fr 1fr}}
 @media(min-width:1080px){.footer-grid{grid-template-columns:1.1fr 1.3fr 1.3fr}}
-footer h4{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);margin:0 0 1em}
+footer h4{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin:0 0 1em}
 footer ul{list-style:none;margin:0;padding:0}
 footer li{margin-bottom:.6em;font-size:.92rem}
 footer a{text-decoration:none}
@@ -308,12 +316,9 @@ footer a:hover{color:var(--rose)}
 }
 .footer-bottom-links{display:flex;flex-wrap:wrap;gap:18px}
 .footer-bottom-links a{text-decoration:underline}
-.footer-social{display:flex;gap:14px}
-.footer-social a{
-  display:flex;align-items:center;justify-content:center;width:36px;height:36px;
-  border-radius:999px;border:1px solid var(--line);background:#fff;
-}
-.footer-social svg{width:16px;height:16px;stroke:var(--ink)}
+.footer-social{display:flex;gap:16px}
+.footer-social svg{width:17px;height:17px;stroke:var(--ink)}
+.footer-social a:hover svg{stroke:var(--rose)}
 </style>
 </head>
 <body>
@@ -358,24 +363,15 @@ footer a:hover{color:var(--rose)}
 <main id="top">
 
   <section class="hero">
-    <div class="wrap">
-      <div class="hero-copy">
-        <span class="eyebrow">Bureaux opérés &middot; Paris</span>
-        <h1>L'expérience du bureau full-services</h1>
-        <p class="lead">L'avantage d'un bureau 100&nbsp;% dédié, aménagé, tout inclus et à durée flexible.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-accent" href="#contact">Je recherche des bureaux →</a>
-          <a class="btn btn-outline" href="#compris">Voir ce qui est inclus</a>
-        </div>
-      </div>
-      <div class="hero-media">
-        <img
-          src="/home/img/hero-1080.webp"
-          srcset="/home/img/hero-640.webp 640w, /home/img/hero-1080.webp 1080w, /home/img/hero-1600.webp 1600w"
-          sizes="(min-width: 960px) 50vw, 100vw"
-          width="1600" height="1067"
-          alt="Bureaux opérés Snapdesk à Paris"
-          fetchpriority="high" decoding="async">
+    <img class="hero-bg" src="/home/img/hero-1080.webp" srcset="/home/img/hero-640.webp 640w, /home/img/hero-1080.webp 1080w, /home/img/hero-1600.webp 1600w" sizes="100vw" width="1600" height="1067" alt="Bureaux opérés Snapdesk à Paris" fetchpriority="high" decoding="async">
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-inner wrap">
+      <span class="eyebrow">Bureaux opérés &middot; Paris</span>
+      <h1>L'expérience du bureau full-services</h1>
+      <p class="lead">L'avantage d'un bureau 100&nbsp;% dédié, aménagé, tout inclus et à durée flexible.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-accent" href="#contact">Je recherche des bureaux</a>
+        <a class="link-arrow light" href="#compris">Voir ce qui est inclus →</a>
       </div>
     </div>
   </section>
@@ -414,28 +410,30 @@ footer a:hover{color:var(--rose)}
 
   <section class="pillars">
     <div class="wrap">
-      <div class="pillars-head">
-        <span class="eyebrow">La révolution des bureaux opérés</span>
-        <h2>Les avantages des bureaux opérés par Snapdesk</h2>
+      <div class="head">
+        <div>
+          <span class="eyebrow">La révolution des bureaux opérés</span>
+          <h2>Les avantages des bureaux opérés par Snapdesk</h2>
+        </div>
       </div>
-      <div class="pillar-grid">
+      <div class="pillar-row">
         <div class="pillar">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3M12 3a9 9 0 1 0 9 9"/></svg></div>
+          <span class="pillar-n">01</span>
           <h3>Contrat flexible</h3>
           <p>Une durée d'engagement adaptée, pour accompagner la croissance de votre équipe.</p>
         </div>
         <div class="pillar">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
+          <span class="pillar-n">02</span>
           <h3>100&nbsp;% chez vous</h3>
           <p>Une seule entreprise par espace&nbsp;: votre plateau est entièrement privatif.</p>
         </div>
         <div class="pillar">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/><path d="M3 12h1M20 12h1M12 3v1M12 20v1"/></svg></div>
+          <span class="pillar-n">03</span>
           <h3>Comme à l'hôtel</h3>
           <p>Une gestion complète&nbsp;: office management, ménage et maintenance assurés au quotidien.</p>
         </div>
         <div class="pillar">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <span class="pillar-n">04</span>
           <h3>Tout est inclus</h3>
           <p>Taxes, charges, EDF, entretien&nbsp;: un seul loyer, sans surprise.</p>
         </div>
@@ -445,9 +443,11 @@ footer a:hover{color:var(--rose)}
 
   <section class="stats-light">
     <div class="wrap">
-      <div class="stats-head">
-        <span class="eyebrow">Le bureau flexible</span>
-        <h2>Sans frais immobilier</h2>
+      <div class="head">
+        <div>
+          <span class="eyebrow">Le bureau flexible</span>
+          <h2>Sans frais immobilier</h2>
+        </div>
         <p>Des bureaux de rêve au cœur de Paris, flexibles et avec services&nbsp;: ils n'attendent plus que vous.</p>
       </div>
       <div class="stat-grid">
@@ -467,16 +467,16 @@ footer a:hover{color:var(--rose)}
         <span class="eyebrow">Le serviced office</span>
         <h2>Nos services inclus</h2>
         <p>Nous simplifions votre quotidien, vous n'avez plus qu'à rester focus sur votre business.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Ménage quotidien</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Maintenance technique</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Office management</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Internet pro &amp; infogérance</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Sécurité incendie</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Végétalisation &amp; entretien</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Accès sécurisé par badges</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Café à volonté</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Votre logo 3D</li>
+        <ul class="plain-list">
+          <li>Ménage quotidien</li>
+          <li>Maintenance technique</li>
+          <li>Office management</li>
+          <li>Internet pro &amp; infogérance</li>
+          <li>Sécurité incendie</li>
+          <li>Végétalisation &amp; entretien</li>
+          <li>Accès sécurisé par badges</li>
+          <li>Café à volonté</li>
+          <li>Votre logo 3D</li>
         </ul>
       </div>
     </div>
@@ -484,9 +484,11 @@ footer a:hover{color:var(--rose)}
 
   <section class="stats">
     <div class="wrap">
-      <div class="stats-head">
-        <span class="eyebrow">Nos chiffres clés</span>
-        <h2>Snapdesk en quelques chiffres</h2>
+      <div class="head">
+        <div>
+          <span class="eyebrow">Nos chiffres clés</span>
+          <h2>Snapdesk en quelques chiffres</h2>
+        </div>
       </div>
       <div class="stat-grid">
         <div class="stat"><div class="num">17&nbsp;000&nbsp;m²</div><p>de bureaux à Paris</p></div>
@@ -498,16 +500,19 @@ footer a:hover{color:var(--rose)}
 
   <section class="spaces">
     <div class="wrap">
-      <div class="spaces-head">
-        <span class="eyebrow">Nos espaces de bureaux privatifs</span>
-        <h2>Vos bureaux de rêve</h2>
+      <div class="head">
+        <div>
+          <span class="eyebrow">Nos espaces de bureaux privatifs</span>
+          <h2>Vos bureaux de rêve</h2>
+        </div>
         <p>Un aperçu de nos plateaux à Paris. Statuts et tarifs à titre indicatif&nbsp;: contactez-nous pour les disponibilités à jour.</p>
       </div>
       <div class="space-grid">
         <a class="space-card" href="https://www.snapdesk.co/bureaux-flexibles/le-malesherbes-paris-17-location-de-bureaux-operes-flexibles">
           <div class="space-thumb">
-            <span class="space-badge available">Disponible</span>
             <img src="/home/img/espace-malesherbes-480.webp" width="480" height="360" alt="Le Malesherbes, bureaux opérés Paris 17" loading="lazy" decoding="async">
+            <span class="space-scrim" aria-hidden="true"></span>
+            <span class="space-badge available">Disponible</span>
           </div>
           <div class="space-body">
             <h3>Le Malesherbes &ndash; Paris 17</h3>
@@ -516,8 +521,9 @@ footer a:hover{color:var(--rose)}
         </a>
         <a class="space-card" href="https://www.snapdesk.co/bureaux-flexibles/le-hauteville-panoramique-paris-10-location-de-bureaux-operes-flexibles">
           <div class="space-thumb">
-            <span class="space-badge">Occupé</span>
             <img src="/home/img/espace-duplex-hauteville-480.webp" width="480" height="360" alt="Le Duplex Hauteville, bureaux opérés Paris 10" loading="lazy" decoding="async">
+            <span class="space-scrim" aria-hidden="true"></span>
+            <span class="space-badge">Occupé</span>
           </div>
           <div class="space-body">
             <h3>Le Duplex Hauteville &ndash; Paris 10</h3>
@@ -526,8 +532,9 @@ footer a:hover{color:var(--rose)}
         </a>
         <a class="space-card" href="https://www.snapdesk.co/bureaux-flexibles/latelier-hauteville-paris-10-location-bureaux-operes-flexibles">
           <div class="space-thumb">
-            <span class="space-badge">Occupé</span>
             <img src="/home/img/espace-atelier-hauteville-480.webp" width="480" height="360" alt="L'Atelier Hauteville, bureaux opérés Paris 10" loading="lazy" decoding="async">
+            <span class="space-scrim" aria-hidden="true"></span>
+            <span class="space-badge">Occupé</span>
           </div>
           <div class="space-body">
             <h3>L'Atelier Hauteville &ndash; Paris 10</h3>
@@ -536,8 +543,9 @@ footer a:hover{color:var(--rose)}
         </a>
         <a class="space-card" href="https://www.snapdesk.co/bureaux-flexibles/lespace-boetie-paris-8-location-de-bureaux-operes-flexibles">
           <div class="space-thumb">
-            <span class="space-badge">Occupé</span>
             <img src="/home/img/espace-boetie-480.webp" width="480" height="360" alt="L'espace Boétie, bureaux opérés Paris 8" loading="lazy" decoding="async">
+            <span class="space-scrim" aria-hidden="true"></span>
+            <span class="space-badge">Occupé</span>
           </div>
           <div class="space-body">
             <h3>L'espace Boétie &ndash; Paris 8</h3>
@@ -546,8 +554,9 @@ footer a:hover{color:var(--rose)}
         </a>
         <a class="space-card" href="https://www.snapdesk.co/bureaux-flexibles/espace-chateaudun-paris-9-location-de-bureaux-operes-flexibles">
           <div class="space-thumb">
-            <span class="space-badge">Occupé</span>
             <img src="/home/img/espace-chateaudun-480.webp" width="480" height="360" alt="Espace Châteaudun, bureaux opérés Paris 9" loading="lazy" decoding="async">
+            <span class="space-scrim" aria-hidden="true"></span>
+            <span class="space-badge">Occupé</span>
           </div>
           <div class="space-body">
             <h3>Espace Châteaudun &ndash; Paris 9</h3>
@@ -556,8 +565,9 @@ footer a:hover{color:var(--rose)}
         </a>
         <a class="space-card" href="https://www.snapdesk.co/bureaux-flexibles/espace-chausse-dantin-paris-9-location-de-bureaux-operes-flexibles">
           <div class="space-thumb">
-            <span class="space-badge">Occupé</span>
             <img src="/home/img/espace-chaussee-antin-480.webp" width="480" height="360" alt="Espace Chaussée d'Antin, bureaux opérés Paris 9" loading="lazy" decoding="async">
+            <span class="space-scrim" aria-hidden="true"></span>
+            <span class="space-badge">Occupé</span>
           </div>
           <div class="space-body">
             <h3>Espace Chaussée d'Antin &ndash; Paris 9</h3>
@@ -566,8 +576,9 @@ footer a:hover{color:var(--rose)}
         </a>
         <a class="space-card" href="https://www.snapdesk.co/bureaux-flexibles/le-turbigo-filant-paris-2-location-de-bureaux-operes-flexibles">
           <div class="space-thumb">
-            <span class="space-badge">Occupé</span>
             <img src="/home/img/espace-turbigo-480.webp" width="480" height="360" alt="Le Turbigo Filant, bureaux opérés Paris 2" loading="lazy" decoding="async">
+            <span class="space-scrim" aria-hidden="true"></span>
+            <span class="space-badge">Occupé</span>
           </div>
           <div class="space-body">
             <h3>Le Turbigo Filant &ndash; Paris 2</h3>
@@ -576,8 +587,9 @@ footer a:hover{color:var(--rose)}
         </a>
         <a class="space-card" href="https://www.snapdesk.co/bureaux-flexibles/le-montorgueil-filant">
           <div class="space-thumb">
-            <span class="space-badge">Occupé</span>
             <img src="/home/img/espace-montorgueil-480.webp" width="480" height="360" alt="Le Montorgueil Filant, bureaux opérés Paris" loading="lazy" decoding="async">
+            <span class="space-scrim" aria-hidden="true"></span>
+            <span class="space-badge">Occupé</span>
           </div>
           <div class="space-body">
             <h3>Le Montorgueil Filant</h3>
@@ -586,39 +598,32 @@ footer a:hover{color:var(--rose)}
         </a>
       </div>
       <div class="spaces-cta">
-        <a class="btn btn-outline" href="https://www.snapdesk.co/bureaux-flexibles-prestation-service">Voir tous nos bureaux →</a>
+        <a class="link-arrow" href="https://www.snapdesk.co/bureaux-flexibles-prestation-service">Voir tous nos bureaux →</a>
       </div>
     </div>
   </section>
 
   <section class="testimonials">
     <div class="wrap">
-      <div class="testimonials-head">
-        <span class="eyebrow">Vos avis comptent</span>
-        <h2>Ils nous font confiance</h2>
+      <div class="head">
+        <div>
+          <span class="eyebrow">Vos avis comptent</span>
+          <h2>Ils nous font confiance</h2>
+        </div>
       </div>
-      <div class="t-grid">
-        <div class="t-card">
-          <p>&laquo;&nbsp;Chez Smart-Chain, nous sommes fans de nos locaux et de l'équipe Snapdesk&nbsp;! Incroyablement réactifs et toujours sympathiques, ils sont à l'écoute et mettent tout en œuvre pour gérer les demandes. C'est un bonheur d'avoir des locaux chez eux. Merci&nbsp;!&nbsp;&raquo;</p>
-          <div class="t-who">
-            <img src="/home/img/avatar-julie.webp" width="44" height="44" alt="Julie Martin" loading="lazy" decoding="async">
-            <div><strong>Julie Martin</strong><span>Smart-Chain</span></div>
-          </div>
-        </div>
-        <div class="t-card">
-          <p>&laquo;&nbsp;Des bureaux bien placés, confortables et bien aménagés, avec une équipe réactive et un sens pointu du service client&hellip; Je recommande Snapdesk&nbsp;!&nbsp;&raquo;</p>
-          <div class="t-who">
-            <img src="/home/img/avatar-perrine.webp" width="44" height="44" alt="Perrine Delobelle" loading="lazy" decoding="async">
-            <div><strong>Perrine Delobelle</strong><span>Tilkal</span></div>
-          </div>
-        </div>
-        <div class="t-card">
-          <p>&laquo;&nbsp;Nous cherchions à avoir nos propres bureaux pour 15 personnes, sans nous engager dans des travaux ni dans un bail 3/6/9 trop engageant. Nous avons découvert Snapdesk, qui nous a ouvert un espace dédié clé en main.&nbsp;&raquo;</p>
-          <div class="t-who">
-            <img src="/home/img/avatar-louis.webp" width="44" height="44" alt="Louis Cibot" loading="lazy" decoding="async">
-            <div><strong>Louis Cibot</strong><span>Zenaton</span></div>
-          </div>
-        </div>
+      <div class="quote-row">
+        <figure class="quote">
+          <blockquote>Chez Smart-Chain, nous sommes fans de nos locaux et de l'équipe Snapdesk&nbsp;! Incroyablement réactifs et toujours sympathiques, ils sont à l'écoute et mettent tout en œuvre pour gérer les demandes. C'est un bonheur d'avoir des locaux chez eux. Merci&nbsp;!</blockquote>
+          <figcaption><strong>Julie Martin</strong> &mdash; Smart-Chain</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>Des bureaux bien placés, confortables et bien aménagés, avec une équipe réactive et un sens pointu du service client&hellip; Je recommande Snapdesk&nbsp;!</blockquote>
+          <figcaption><strong>Perrine Delobelle</strong> &mdash; Tilkal</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>Nous cherchions à avoir nos propres bureaux pour 15 personnes, sans nous engager dans des travaux ni dans un bail 3/6/9 trop engageant. Nous avons découvert Snapdesk, qui nous a ouvert un espace dédié clé en main.</blockquote>
+          <figcaption><strong>Louis Cibot</strong> &mdash; Zenaton</figcaption>
+        </figure>
       </div>
       <p class="t-count">90+ entreprises nous ont fait confiance</p>
     </div>
@@ -626,29 +631,31 @@ footer a:hover{color:var(--rose)}
 
   <section class="blog">
     <div class="wrap">
-      <div class="blog-head">
-        <span class="eyebrow">Le blog Snapdesk</span>
-        <h2>En live de notre blog</h2>
+      <div class="head">
+        <div>
+          <span class="eyebrow">Le blog Snapdesk</span>
+          <h2>En live de notre blog</h2>
+        </div>
       </div>
-      <div class="blog-grid">
-        <a class="blog-card" href="https://www.snapdesk.co/immobilier-bureaux/bureau-opere-quelles-garanties-de-securite-et-de-confidentialite">
+      <div class="post-list">
+        <a class="post-row" href="https://www.snapdesk.co/immobilier-bureaux/bureau-opere-quelles-garanties-de-securite-et-de-confidentialite">
           <h3>Bureau opéré&nbsp;: quelles garanties de sécurité et de confidentialité&nbsp;?</h3>
           <p>Vous vous interrogez sur la sécurité et la confidentialité de vos futurs locaux&nbsp;?</p>
-          <span class="read">Continuer la lecture →</span>
+          <span class="link-arrow">Lire →</span>
         </a>
-        <a class="blog-card" href="https://www.snapdesk.co/immobilier-bureaux/trouver-un-bureau-flexible-au-coeur-du-triangle-dor-le-secret-du-bureau-opere">
+        <a class="post-row" href="https://www.snapdesk.co/immobilier-bureaux/trouver-un-bureau-flexible-au-coeur-du-triangle-dor-le-secret-du-bureau-opere">
           <h3>Trouver un bureau flexible au cœur du Triangle d'Or</h3>
           <p>Qu'est-ce que le Triangle d'Or de Paris et pourquoi y installer ses bureaux&nbsp;?</p>
-          <span class="read">Continuer la lecture →</span>
+          <span class="link-arrow">Lire →</span>
         </a>
-        <a class="blog-card" href="https://www.snapdesk.co/immobilier-bureaux/combien-coutent-vraiment-vos-bureaux-en-bail-commercial-3-6-9">
+        <a class="post-row" href="https://www.snapdesk.co/immobilier-bureaux/combien-coutent-vraiment-vos-bureaux-en-bail-commercial-3-6-9">
           <h3>Combien coûtent vraiment vos bureaux en bail 3/6/9&nbsp;?</h3>
           <p>Loyer facial vs coût réel&nbsp;: pourquoi votre budget bureaux risque de déraper.</p>
-          <span class="read">Continuer la lecture →</span>
+          <span class="link-arrow">Lire →</span>
         </a>
       </div>
       <div class="blog-cta">
-        <a class="btn btn-outline" href="/blog">Voir tous les articles →</a>
+        <a class="link-arrow" href="/blog">Voir tous les articles →</a>
       </div>
     </div>
   </section>
