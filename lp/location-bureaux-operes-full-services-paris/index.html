@@ -249,14 +249,15 @@ footer a{text-decoration:underline}
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <span class="eyebrow">Bureaux opérés &middot; Paris intramuros</span>
-        <h1>Location de bureaux opérés à Paris intramuros</h1>
+        <span class="eyebrow" data-zone-template="Bureaux opérés &middot; {ZONE}">Bureaux opérés &middot; Paris intramuros</span>
+        <h1 data-zone-template="Location de bureaux opérés {ZONE}" data-zone-field="intro">Location de bureaux opérés à Paris intramuros</h1>
         <p class="lead">L'avantage d'un bureau privatif livré clés en main, 100&nbsp;% dédié, aménagé, tout inclus et pour une durée flexible.</p>
         <div class="hero-ctas">
           <a class="btn btn-accent" href="#contact">Je recherche des bureaux →</a>
           <a class="btn btn-outline" href="#compris">Voir ce qui est inclus</a>
         </div>
       </div>
+      <script src="/lp/assets/js/zone-header.js"></script>
       <div class="hero-media">
         <img
           src="/lp/location-bureaux-operes-full-services-paris/img/hero-1080.webp"
