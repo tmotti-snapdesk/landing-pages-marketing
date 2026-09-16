@@ -513,5 +513,84 @@ footer a{text-decoration:underline}
   </div>
 </footer>
 
+<!-- Personnalisation par arrondissement / quartier pour les campagnes Google Ads.
+     Ajouter ?zone=9 (arrondissement) ou ?zone=marais (quartier) à l'URL finale
+     de chaque annonce. Sans paramètre reconnu, la page garde son contenu
+     générique "Paris intramuros" par défaut. Ce script doit rester APRÈS le
+     h1/les balises meta et AVANT le chargement de l'embed Typeform (déjà
+     garanti ici : ce script inline s'exécute pendant le parsing HTML, alors
+     que embed.js, chargé en "defer" dans le <head>, ne s'exécute qu'une fois
+     tout le document analysé). -->
+<script>
+(function () {
+  function ordinal(n) { return n === 1 ? '1er' : n + 'e'; }
+
+  // Quartiers connus : liste de départ à compléter/ajuster. Clé = valeur du
+  // paramètre ?zone= (en minuscules), "short" = utilisé dans l'eyebrow,
+  // "label" = utilisé dans la phrase d'accroche ("... livré clés en main
+  // <label>, 100 % dédié...").
+  var QUARTIERS = {
+    'marais':        { short: 'Le Marais',                 label: 'dans le Marais' },
+    'opera':          { short: 'Opéra',                      label: 'quartier de l’Opéra' },
+    'champs-elysees': { short: 'Champs-Élysées',             label: 'aux Champs-Élysées' },
+    'saint-germain':  { short: 'Saint-Germain-des-Prés',     label: 'à Saint-Germain-des-Prés' },
+    'bastille':       { short: 'Bastille',                   label: 'à Bastille' },
+    'republique':     { short: 'République',                 label: 'quartier République' }
+  };
+
+  var params = new URLSearchParams(window.location.search);
+  var raw = (params.get('zone') || params.get('arrondissement') || '').trim().toLowerCase();
+  if (!raw) return;
+
+  var zone = null;
+  if (QUARTIERS[raw]) {
+    var q = QUARTIERS[raw];
+    zone = {
+      short: q.short,
+      h1: 'Location de bureaux opérés ' + q.label + ' à Paris',
+      lead: 'L’avantage d’un bureau privatif livré clés en main ' + q.label + ', 100 % dédié, aménagé, tout inclus et pour une durée flexible.',
+      title: 'Location de bureaux opérés ' + q.short + ' (Paris) | Snapdesk',
+      description: 'Bureaux privatifs opérés ' + q.label + ', clé en main et tout inclus : mobilier, internet, ménage, maintenance et conciergerie. Engagement flexible, à partir de 10 postes.'
+    };
+  } else {
+    var match = raw.match(/(\d{1,2})/);
+    var n = match ? parseInt(match[1], 10) : null;
+    if (n && n >= 1 && n <= 20) {
+      var ord = ordinal(n);
+      zone = {
+        short: 'Paris ' + ord,
+        h1: 'Location de bureaux opérés dans le ' + ord + ' arrondissement de Paris',
+        lead: 'L’avantage d’un bureau privatif livré clés en main dans le ' + ord + ' arrondissement, 100 % dédié, aménagé, tout inclus et pour une durée flexible.',
+        title: 'Location de bureaux opérés Paris ' + ord + ' arrondissement | Snapdesk',
+        description: 'Bureaux privatifs opérés dans le ' + ord + ' arrondissement de Paris, clé en main et tout inclus : mobilier, internet, ménage, maintenance et conciergerie. Engagement flexible, à partir de 10 postes.'
+      };
+    }
+  }
+  if (!zone) return;
+
+  document.title = zone.title;
+  var setMeta = function (selector, attr, value) {
+    var el = document.querySelector(selector);
+    if (el) el.setAttribute(attr, value);
+  };
+  setMeta('meta[name="description"]', 'content', zone.description);
+  setMeta('meta[property="og:title"]', 'content', zone.title);
+  setMeta('meta[property="og:description"]', 'content', zone.description);
+
+  var eyebrow = document.querySelector('.hero .eyebrow');
+  if (eyebrow) eyebrow.textContent = 'Bureaux opérés · ' + zone.short;
+  var h1 = document.querySelector('.hero h1');
+  if (h1) h1.textContent = zone.h1;
+  var lead = document.querySelector('.hero-copy p.lead');
+  if (lead) lead.textContent = zone.lead;
+
+  // Marque le lead Typeform avec la zone recherchée, pour pouvoir filtrer les
+  // réponses par arrondissement/quartier ensuite (le champ caché "zone" doit
+  // exister dans les paramètres du formulaire Typeform pour être capturé).
+  var tf = document.querySelector('[data-tf-live]');
+  if (tf) tf.setAttribute('data-tf-hidden', 'zone=' + encodeURIComponent(raw));
+})();
+</script>
+
 </body>
 </html>
